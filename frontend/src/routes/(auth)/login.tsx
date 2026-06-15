@@ -5,7 +5,9 @@ import { motion } from 'framer-motion'
 import { HandwrittenArrow } from '@/components/ui/handwritten-arrow'
 import { TurnstileWidget } from '@/components/ui/turnstile-widget'
 import { GOOGLE_LOGIN_ENABLED, GoogleLoginButton } from '@/components/ui/google-login-button'
-import workspaceBg from '@/assets/images/login-day.webp'
+import workspaceDay from '@/assets/images/login-day.webp'
+import workspaceNight from '@/assets/images/login-night.webp'
+import { useTheme } from '@/hooks/use-theme'
 import { useAuthGuard } from '@/hooks/use-auth'
 import { useLogin } from '@/hooks/use-login'
 import { useSilentSso } from '@/hooks/use-silent-sso'
@@ -17,6 +19,7 @@ export const Route = createFileRoute('/(auth)/login')({
 function LoginPage() {
   useAuthGuard({ isAuthPage: true })
   useSilentSso()
+  const { isDark } = useTheme()
 
   const {
     register,
@@ -36,7 +39,7 @@ function LoginPage() {
     <div
       className="min-h-screen w-full flex items-center justify-center relative overflow-hidden"
       style={{
-        backgroundImage: `url(${workspaceBg})`,
+        backgroundImage: `url(${isDark ? workspaceNight : workspaceDay})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -68,7 +71,7 @@ function LoginPage() {
           transition={{ type: 'spring', bounce: 0.2, duration: 0.5 }}
           className="w-full relative"
         >
-          <Card className="bg-white/80 backdrop-blur-md shadow-2xl border-0 w-full">
+          <Card className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-2xl border-0 w-full">
             <CardBody className="p-8 gap-6">
               {/* Header */}
               <div className="text-center space-y-2">
@@ -83,7 +86,7 @@ function LoginPage() {
                     className="text-primary mt-2 -ml-4"
                   />
                 </h1>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-default-500">
                   Sign in to continue to your dashboard
                 </p>
               </div>
@@ -109,7 +112,7 @@ function LoginPage() {
               {/* Divider */}
               <div className="flex items-center gap-4">
                 <Divider className="flex-1" />
-                <span className="text-gray-400 text-sm">or</span>
+                <span className="text-default-400 text-sm">or</span>
                 <Divider className="flex-1" />
               </div>
 
@@ -123,7 +126,7 @@ function LoginPage() {
                   label="Email"
                   placeholder="Enter your email"
                   type="email"
-                  startContent={<User className="w-4 h-4 text-gray-400" />}
+                  startContent={<User className="w-4 h-4 text-default-400" />}
                   variant="underlined"
                   isRequired
                   isInvalid={!!errors.email}
@@ -135,7 +138,7 @@ function LoginPage() {
                   label="Password"
                   placeholder="••••••••••••"
                   type={isPasswordVisible ? 'text' : 'password'}
-                  startContent={<Lock className="w-4 h-4 text-gray-400" />}
+                  startContent={<Lock className="w-4 h-4 text-default-400" />}
                   endContent={
                     <button
                       type="button"
@@ -143,9 +146,9 @@ function LoginPage() {
                       className="focus:outline-none"
                     >
                       {isPasswordVisible ? (
-                        <EyeOff className="w-4 h-4 text-gray-400" />
+                        <EyeOff className="w-4 h-4 text-default-400" />
                       ) : (
-                        <Eye className="w-4 h-4 text-gray-400" />
+                        <Eye className="w-4 h-4 text-default-400" />
                       )}
                     </button>
                   }
@@ -154,9 +157,9 @@ function LoginPage() {
                   isInvalid={!!errors.password}
                   errorMessage={errors.password?.message}
                   classNames={{
-                    label: 'text-gray-500 text-sm',
-                    input: 'text-gray-800',
-                    inputWrapper: 'border-gray-200',
+                    label: 'text-default-500 text-sm',
+                    input: 'text-foreground',
+                    inputWrapper: 'border-default-200',
                   }}
                 />
 

@@ -34,7 +34,7 @@ function ResetPasswordPage() {
 
   return (
     <AuthPageShell>
-      <Card className="bg-white/80 backdrop-blur-md shadow-2xl border-0 w-full">
+      <Card className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-2xl border-0 w-full">
         <CardBody className="p-8 gap-6">
           {!token ? (
             <MissingTokenState />
@@ -42,20 +42,20 @@ function ResetPasswordPage() {
             <>
               <div className="text-center space-y-2">
                 <div className="flex justify-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-teal-50 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-teal-50 dark:bg-teal-900/30 flex items-center justify-center">
                     <Lock className="w-6 h-6 text-teal-600" />
                   </div>
                 </div>
-                <h1 className="text-2xl font-bold tracking-tight text-gray-900">
+                <h1 className="text-2xl font-bold tracking-tight text-foreground">
                   Set New Password
                 </h1>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-default-500">
                   Choose a strong password for your account
                 </p>
               </div>
 
               {apiError && (
-                <div className="flex items-start gap-2 rounded-lg bg-red-50 border border-red-100 px-4 py-3">
+                <div className="flex items-start gap-2 rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-100 px-4 py-3">
                   <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5 shrink-0" />
                   <p className="text-sm text-red-600">
                     {apiError}{' '}
@@ -130,13 +130,13 @@ function PasswordInput({
       label={label}
       placeholder="••••••••••••"
       type={isVisible ? 'text' : 'password'}
-      startContent={<Lock className="w-4 h-4 text-gray-400" />}
+      startContent={<Lock className="w-4 h-4 text-default-400" />}
       endContent={
         <button type="button" onClick={onToggle} className="focus:outline-none">
           {isVisible ? (
-            <EyeOff className="w-4 h-4 text-gray-400" />
+            <EyeOff className="w-4 h-4 text-default-400" />
           ) : (
-            <Eye className="w-4 h-4 text-gray-400" />
+            <Eye className="w-4 h-4 text-default-400" />
           )}
         </button>
       }
@@ -152,15 +152,15 @@ function MissingTokenState() {
   return (
     <div className="text-center space-y-4">
       <div className="flex justify-center">
-        <div className="w-16 h-16 rounded-full bg-red-50 flex items-center justify-center">
+        <div className="w-16 h-16 rounded-full bg-red-50 dark:bg-red-900/30 flex items-center justify-center">
           <AlertTriangle className="w-8 h-8 text-red-500" />
         </div>
       </div>
       <div className="space-y-2">
-        <h1 className="text-xl font-bold tracking-tight text-gray-900">
+        <h1 className="text-xl font-bold tracking-tight text-foreground">
           Invalid Reset Link
         </h1>
-        <p className="text-sm text-gray-500 leading-relaxed">
+        <p className="text-sm text-default-500 leading-relaxed">
           This password reset link is missing or invalid. Please request a new
           one.
         </p>
@@ -180,7 +180,7 @@ function BackToLogin() {
     <div className="flex justify-center">
       <Link
         to="/login"
-        className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-teal-600 transition-colors"
+        className="flex items-center gap-1.5 text-sm text-default-500 hover:text-teal-600 transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         Back to Login

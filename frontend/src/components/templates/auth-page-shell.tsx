@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
-import workspaceBg from '@/assets/images/login-day.webp'
+import workspaceDay from '@/assets/images/login-day.webp'
+import workspaceNight from '@/assets/images/login-night.webp'
+import { useTheme } from '@/hooks/use-theme'
 
 interface AuthPageShellProps {
   children: React.ReactNode
@@ -16,11 +18,12 @@ interface AuthPageShellProps {
  * forgot/reset password, verify email) and the verification gate.
  */
 export function AuthPageShell({ children, morph = true }: AuthPageShellProps) {
+  const { isDark } = useTheme()
   return (
     <div
       className="min-h-screen w-full flex items-center justify-center relative overflow-hidden"
       style={{
-        backgroundImage: `url(${workspaceBg})`,
+        backgroundImage: `url(${isDark ? workspaceNight : workspaceDay})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
