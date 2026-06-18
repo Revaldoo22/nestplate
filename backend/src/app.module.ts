@@ -13,6 +13,7 @@ import { InvitationsModule } from './invitations/invitations.module';
 import { AuthModule } from './auth/auth.module';
 import { SsoModule } from './sso/sso.module';
 import { RolesModule } from './roles/roles.module';
+import { NotesModule } from './notes/notes.module';
 import { PermissionsModule } from './permissions/permissions.module';
 import { MediaModule } from './media/media.module';
 import { SeederModule } from './database/seeder/seeder.module';
@@ -129,6 +130,7 @@ const initLogger = pino({ name: 'AppModule' });
     AuthModule,
     SsoModule,
     RolesModule,
+    NotesModule,
     PermissionsModule,
     MediaModule,
     SeederModule,

@@ -36,4 +36,9 @@ export type PermissionType =
   | 'roles.update'
   | 'roles.delete'
   | 'roles.manage_permissions'
+  | 'menu.notes'
+  | 'notes.create'
+  | 'notes.read'
+  | 'notes.update'
+  | 'notes.delete'
   | 'google-drive.access';

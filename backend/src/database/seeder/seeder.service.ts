@@ -19,6 +19,7 @@ export class SeederService implements OnApplicationBootstrap {
     { name: 'menu.permissions', description: 'View permissions in sidebar' },
     { name: 'menu.media', description: 'View media library in sidebar' },
     { name: 'menu.invitations', description: 'View invitations in sidebar' },
+    { name: 'menu.notes', description: 'View notes in sidebar' },
 
     // User permissions
     { name: 'users.invite', description: 'Invite new users' },
@@ -62,6 +63,12 @@ export class SeederService implements OnApplicationBootstrap {
       description: 'Delete all media files regardless of ownership',
     },
     { name: 'media.delete', description: 'Delete media files' },
+
+    // Note permissions
+    { name: 'notes.create', description: 'Create new notes' },
+    { name: 'notes.read', description: 'Read note details' },
+    { name: 'notes.update', description: 'Update note details' },
+    { name: 'notes.delete', description: 'Delete notes' },
   ];
 
   constructor(
