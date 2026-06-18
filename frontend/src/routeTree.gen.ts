@@ -16,6 +16,7 @@ import { Route as usersUsersRouteImport } from './routes/(users)/users'
 import { Route as usersInvitationsRouteImport } from './routes/(users)/invitations'
 import { Route as mediaMediaRouteImport } from './routes/(media)/media'
 import { Route as contentNotificationsRouteImport } from './routes/(content)/notifications'
+import { Route as contentNotesRouteImport } from './routes/(content)/notes'
 import { Route as authVerifyEmailRouteImport } from './routes/(auth)/verify-email'
 import { Route as authResetPasswordRouteImport } from './routes/(auth)/reset-password'
 import { Route as authLoginRouteImport } from './routes/(auth)/login'
@@ -57,6 +58,11 @@ const mediaMediaRoute = mediaMediaRouteImport.update({
 const contentNotificationsRoute = contentNotificationsRouteImport.update({
   id: '/(content)/notifications',
   path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const contentNotesRoute = contentNotesRouteImport.update({
+  id: '/(content)/notes',
+  path: '/notes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const authVerifyEmailRoute = authVerifyEmailRouteImport.update({
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof authLoginRoute
   '/reset-password': typeof authResetPasswordRoute
   '/verify-email': typeof authVerifyEmailRoute
+  '/notes': typeof contentNotesRoute
   '/notifications': typeof contentNotificationsRoute
   '/media': typeof mediaMediaRoute
   '/invitations': typeof usersInvitationsRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByTo {
   '/login': typeof authLoginRoute
   '/reset-password': typeof authResetPasswordRoute
   '/verify-email': typeof authVerifyEmailRoute
+  '/notes': typeof contentNotesRoute
   '/notifications': typeof contentNotificationsRoute
   '/media': typeof mediaMediaRoute
   '/invitations': typeof usersInvitationsRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/(auth)/login': typeof authLoginRoute
   '/(auth)/reset-password': typeof authResetPasswordRoute
   '/(auth)/verify-email': typeof authVerifyEmailRoute
+  '/(content)/notes': typeof contentNotesRoute
   '/(content)/notifications': typeof contentNotificationsRoute
   '/(media)/media': typeof mediaMediaRoute
   '/(users)/invitations': typeof usersInvitationsRoute
@@ -156,6 +165,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/verify-email'
+    | '/notes'
     | '/notifications'
     | '/media'
     | '/invitations'
@@ -172,6 +182,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/reset-password'
     | '/verify-email'
+    | '/notes'
     | '/notifications'
     | '/media'
     | '/invitations'
@@ -188,6 +199,7 @@ export interface FileRouteTypes {
     | '/(auth)/login'
     | '/(auth)/reset-password'
     | '/(auth)/verify-email'
+    | '/(content)/notes'
     | '/(content)/notifications'
     | '/(media)/media'
     | '/(users)/invitations'
@@ -205,6 +217,7 @@ export interface RootRouteChildren {
   authLoginRoute: typeof authLoginRoute
   authResetPasswordRoute: typeof authResetPasswordRoute
   authVerifyEmailRoute: typeof authVerifyEmailRoute
+  contentNotesRoute: typeof contentNotesRoute
   contentNotificationsRoute: typeof contentNotificationsRoute
   mediaMediaRoute: typeof mediaMediaRoute
   usersInvitationsRoute: typeof usersInvitationsRoute
@@ -262,6 +275,13 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/notifications'
       preLoaderRoute: typeof contentNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(content)/notes': {
+      id: '/(content)/notes'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof contentNotesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(auth)/verify-email': {
@@ -325,6 +345,7 @@ const rootRouteChildren: RootRouteChildren = {
   authLoginRoute: authLoginRoute,
   authResetPasswordRoute: authResetPasswordRoute,
   authVerifyEmailRoute: authVerifyEmailRoute,
+  contentNotesRoute: contentNotesRoute,
   contentNotificationsRoute: contentNotificationsRoute,
   mediaMediaRoute: mediaMediaRoute,
   usersInvitationsRoute: usersInvitationsRoute,

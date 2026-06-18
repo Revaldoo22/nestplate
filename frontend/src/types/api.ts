@@ -27,6 +27,16 @@ export interface Invitation {
   createdAt: string
 }
 
+// Hand-written until the backend swagger is regenerated with the Notes routes,
+// at which point this can become `components['schemas']['Note']`.
+export interface Note {
+  id: number
+  title: string
+  content?: string
+  createdAt: string
+  updatedAt: string
+}
+
 export interface PaginatedData<T> {
   data: Array<T>
   meta: PaginationMeta

@@ -29,5 +29,6 @@ export type {
 export { useUsersUiStore } from './users-ui.store'
 export { useRolesUiStore } from './roles-ui.store'
 export { usePermissionsUiStore } from './permissions-ui.store'
+export { useNotesUiStore } from './notes-ui.store'
 export { useMediaUiStore } from './media-ui.store'
 export { useInvitationsUiStore } from './invitations-ui.store'

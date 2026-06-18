@@ -4,6 +4,7 @@ import {
   Key,
   LayoutDashboard,
   Mail,
+  NotebookPen,
   Settings,
   Shield,
   Users,
@@ -21,6 +22,7 @@ export const MENU_PERMISSIONS = {
   permissions: 'menu.permissions',
   media: 'menu.media',
   invitations: 'menu.invitations',
+  notes: 'menu.notes',
 } as const
 
 export type MenuPermissionKey =
@@ -106,6 +108,14 @@ export const sidebarData: Array<NavGroup> = [
         href: '/media',
         menuPermission: MENU_PERMISSIONS.media,
         permission: 'media.read',
+      },
+      {
+        key: 'notes',
+        icon: <NotebookPen size={20} />,
+        label: 'Notes',
+        href: '/notes',
+        menuPermission: MENU_PERMISSIONS.notes,
+        permission: 'notes.read',
       },
     ],
   },
