@@ -9,6 +9,7 @@ import { Note } from './entities/note.entity';
 describe('NotesService', () => {
   let service: NotesService;
   let noteRepository: Repository<Note>;
+  let eventEmitter: EventEmitter2;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -32,6 +33,7 @@ describe('NotesService', () => {
 
     service = module.get<NotesService>(NotesService);
     noteRepository = module.get<Repository<Note>>(getRepositoryToken(Note));
+    eventEmitter = module.get<EventEmitter2>(EventEmitter2);
   });
 
   it('should be defined', () => {
@@ -46,6 +48,22 @@ describe('NotesService', () => {
 
       expect(noteRepository.save).toHaveBeenCalled();
       expect(result).toMatchObject(dto);
+    });
+  });
+
+  describe('createNote', () => {
+    it('should emit note.created with the actorId', async () => {
+      const dto = { title: 'My note', content: 'Hello world' };
+
+      const result = await service.createNote(dto, 42);
+
+      expect(noteRepository.save).toHaveBeenCalled();
+      expect(result).toMatchObject(dto);
+      expect(eventEmitter.emit).toHaveBeenCalledWith('note.created', {
+        noteId: 1,
+        title: 'My note',
+        actorId: 42,
+      });
     });
   });
 

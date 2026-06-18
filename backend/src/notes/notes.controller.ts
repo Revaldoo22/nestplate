@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Query,
+  Req,
   UseInterceptors,
 } from '@nestjs/common';
 import {
@@ -29,6 +30,7 @@ import { NotesService } from './notes.service';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
 import { Note } from './entities/note.entity';
+import type { IAuthRequest } from '../auth/interfaces/auth-request.interface';
 
 class PaginatedNoteResponse extends PaginatedResponseDto<Note> {
   @ApiProperty({ type: [Note] })
@@ -50,8 +52,11 @@ export class NotesController {
   @ApiOperation({ summary: 'Create a new note' })
   @ApiResponse({ status: 201, type: Note })
   @UseInterceptors(NoFilesInterceptor())
-  async create(@Body() createNoteDto: CreateNoteDto) {
-    const result = await this.notesService.create(createNoteDto);
+  async create(@Body() createNoteDto: CreateNoteDto, @Req() req: IAuthRequest) {
+    const result = await this.notesService.createNote(
+      createNoteDto,
+      req.user.userId,
+    );
     await this.cacheService.clearKeys('*/notes*');
     return result;
   }

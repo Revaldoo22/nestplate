@@ -94,6 +94,25 @@ export class NotificationsListener {
     );
   }
 
+  // ─── Note Events ─────────────────────────────────────────────────────────────
+
+  @OnEvent('note.created')
+  async handleNoteCreated(payload: {
+    noteId: number;
+    title: string;
+    actorId?: number;
+  }) {
+    await this.notifyAdmins(
+      {
+        title: 'New Note Created',
+        message: `A new note "${payload.title}" has been created.`,
+        type: NotificationType.INFO,
+        link: `/notes`,
+      },
+      payload.actorId,
+    );
+  }
+
   // ─── User Events ─────────────────────────────────────────────────────────────
 
   @OnEvent('user.created')
